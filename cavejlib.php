@@ -173,7 +173,7 @@ function cavej_duplicate_category($category, $parent) {
     $newcategory->visible = $category->visible;
     $newcategory->visibleold = $category->visibleold;
     //$newcategory->timemodified = time();
-    $mycategory = coursecat::create($newcategory);
+    $mycategory = core_course_category::create($newcategory);
     return $mycategory;
 }
 

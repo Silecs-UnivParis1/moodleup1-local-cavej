@@ -3,7 +3,6 @@
 define('CLI_SCRIPT', true);
 require(dirname(dirname(dirname(__DIR__))).'/config.php'); // global moodle config file.
 require_once($CFG->libdir.'/clilib.php');
-require_once($CFG->dirroot . "/lib/coursecatlib.php");
 require(dirname(__DIR__) . '/cavej_duplicate_course.class.php');
 require(dirname(__DIR__) . '/cavejlib.php');
 
