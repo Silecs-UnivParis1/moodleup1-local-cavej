@@ -231,9 +231,11 @@ function cavej_enrolment($oldcourse, $newcourse) {
             if ($manuals != FALSE && count($manuals)) {
                 foreach ($manuals as $manual) {
                     $sql = "select roleid from {role_assignments} WHERE userid=".$manual->userid." AND contextid=" . $oldcontext->id;
-                    $roleid = $DB->get_field_sql($sql);
-                    if ($roleid) {
-                        enrol_try_internal_enrol($newcourse->id, $manual->userid, $roleid);
+                    $rolesid = $DB->get_fieldset_sql($sql);
+                    if ($rolesid && count($rolesid)) {
+                        foreach ($rolesid as $roleid) {
+                            enrol_try_internal_enrol($newcourse->id, $manual->userid, $roleid);
+                        }
                     }
                 }
             }
