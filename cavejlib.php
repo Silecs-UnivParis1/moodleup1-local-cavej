@@ -244,11 +244,12 @@ function cavej_enrolment($oldcourse, $newcourse) {
 /**
  * patch permettant de modifier les shortname de $oldcourse et $newcourse
  */
-function cavej_rename_shortname($oldcourse, $newcourse, $shortname) {
+function cavej_rename_shortname($oldcourse, $newcourse, $shortname,$fullname ) {
     global $DB;
     $curyear = get_config('local_cohortsyncup1', 'cohort_period');
-    $oldname = $shortname .  $curyear;
-
-    $DB->execute("UPDATE {course} SET shortname = ? WHERE id = ?", array($oldname, $oldcourse->id));
+    $shortname = substr($shortname, 0,3)=="202" ?  $curyear.' - '. substr($shortname, 7) : $curyear.' - '. $shortname  ;
+    $fullname =  substr($fullname, 0,3)=="202" ?  $curyear.' - '. substr($fullname, 7) : $fullname =  $curyear.' - '. $fullname  ;
+   
     $DB->execute("UPDATE {course} SET shortname = ? WHERE id = ?", array($shortname, $newcourse->id));
+    $DB->execute("UPDATE {course} SET fullname = ? WHERE id = ?", array($fullname, $newcourse->id));
 }
